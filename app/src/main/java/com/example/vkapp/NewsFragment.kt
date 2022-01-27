@@ -22,5 +22,4 @@ class NewsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_news, container, false)
     }
 
-
 }

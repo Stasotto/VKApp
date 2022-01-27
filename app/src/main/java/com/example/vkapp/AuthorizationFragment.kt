@@ -12,8 +12,13 @@ import android.webkit.WebViewClient
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import com.example.vkapp.const.TOKEN
 import com.example.vkapp.const.URL_AUTH_GET_TOKEN
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class AuthorizationFragment : Fragment() {
@@ -49,10 +54,15 @@ class AuthorizationFragment : Fragment() {
         loadAuth()
         destroyView()
 
-        dm.token.observe(activity as LifecycleOwner, {
-            val tokeen = it
-            Log.d("CW", tokeen)
-        })
+        GlobalScope.launch(Dispatchers.Main) {
+            dm.token.observe(viewLifecycleOwner, {
+                TOKEN = it
+                Log.d("CW3", "${TOKEN}")
+            })
+            delay(1000)
+            Log.d("CW2", TOKEN)
+        }
+
     }
 
     private fun destroyView() {
