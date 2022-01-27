@@ -12,6 +12,7 @@ import android.webkit.WebViewClient
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
+import com.example.vkapp.const.TOKEN
 import com.example.vkapp.const.URL_AUTH_GET_TOKEN
 
 
