@@ -67,7 +67,7 @@ class AuthorizationFragment : Fragment() {
     private fun retrofitResponse() {
         GlobalScope.launch {
 
-            // Стас, чекни как разобает @Query, надеюсь в рабочем коде тебе будет лучше понятно
+            // Стас, чекни как работает @Query, надеюсь в рабочем коде тебе будет лучше понятно
             // Я там тебе комменты оставил
             val response = retrofitBuilder.newsJSONResponse(
                 getToken,
