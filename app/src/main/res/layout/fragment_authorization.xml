@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".AuthorizationFragment">
 
+    <Button
+        android:id="@+id/button_web_view_destroy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Destroy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
