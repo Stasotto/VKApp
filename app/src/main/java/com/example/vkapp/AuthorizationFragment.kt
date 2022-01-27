@@ -29,15 +29,15 @@ class AuthorizationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        webView = requireView().findViewById(R.id.web_view)
+        webView.settings.javaScriptEnabled
         loadAuth()
     }
 
     private fun loadAuth() {
-        webView = requireView().findViewById(R.id.web_view)
-        webView.settings.javaScriptEnabled
         webView.loadUrl(URL_AUTH_GET_TOKEN)
-
-//        Log.d("CW", urlWebView)
+        
     }
 
 }
