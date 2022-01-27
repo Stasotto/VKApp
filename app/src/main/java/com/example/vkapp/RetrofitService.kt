@@ -1,5 +1,6 @@
 package com.example.vkapp
 
+import com.example.vkapp.const.BASE_URL_OAUTH
 import retrofit2.http.GET
 
 interface RetrofitService {
