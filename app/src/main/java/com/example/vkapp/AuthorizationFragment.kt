@@ -2,7 +2,6 @@ package com.example.vkapp
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +9,15 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
-import com.example.vkapp.const.TOKEN
 import com.example.vkapp.const.URL_AUTH_GET_TOKEN
-
-
+import com.example.vkapp.const.VERSION
+import com.example.vkapp.const.getToken
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.awaitResponse
 
 class AuthorizationFragment : Fragment() {
 
@@ -25,6 +27,8 @@ class AuthorizationFragment : Fragment() {
     private var urlLink: String = ""
 
     private val dm: TokenData by activityViewModels()
+
+    var retrofitBuilder = RetrofitCreator().getUserAccessToken()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,14 +55,38 @@ class AuthorizationFragment : Fragment() {
         destroyView()
 
         dm.token.observe(activity as LifecycleOwner, {
-            val tokeen = it
-            Log.d("CW", tokeen)
+            getToken = it
+            Log.d("CW", getToken)
         })
+    }
+
+    //а вот здесь если вызывать, то все работает шикарно
+    //я хз с чем это связано
+    //Вызов метода по кнопке в функции снизу, если что
+
+    private fun retrofitResponse() {
+        GlobalScope.launch {
+
+            // Стас, чекни как работает @Query, надеюсь в рабочем коде тебе будет лучше понятно
+            // Я там тебе комменты оставил
+            val response = retrofitBuilder.newsJSONResponse(
+                getToken,
+                VERSION
+            ).awaitResponse()
+
+            if (response.isSuccessful) {
+                val data = response.body()!! // Здесь, кстати, не забываем "!!" после вызова тела,
+                // чтобы погружаясь в data class не втыкать "?" по 100500 раз в 1 строке
+                val k = (data.response.items[0].post_type).toString()
+                Log.d("CWW", k)
+            }
+        }
     }
 
     private fun destroyView() {
 
-        buttonDestroy.setOnClickListener{
+        buttonDestroy.setOnClickListener {
+            retrofitResponse()
             webView.destroy()
         }
     }
@@ -80,7 +108,7 @@ class AuthorizationFragment : Fragment() {
                 val token = s.substringAfter("%253D")
                 dm.token.value = token
 
-                Log.d("!!!",token)
+                Log.d("!!!", token)
 
                 return super.shouldOverrideUrlLoading(view, request)
             }
