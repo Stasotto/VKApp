@@ -6,15 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.vkapp.model.ModelMain
 
 
 //для класса fragment_news.xml -> news_item
 
-class NewsAdapter(
-    private var newsList: MutableList<NewsToAdapt>,
-    private val fragment: NewsFragment
-) :
-    RecyclerView.Adapter<PostPhotoAdapter.NewsHolder>() {
+class NewsAdapter(private var newsList: MutableList<ModelMain>) :
+    RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
 
     class NewsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imAvatar: ImageView? = null
@@ -31,10 +29,10 @@ class NewsAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostPhotoAdapter.NewsHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
         val inflater = LayoutInflater.from(parent.context)
         val layout = inflater.inflate(R.layout.news_item, parent, false)
-        return PostPhotoAdapter.NewsHolder(layout)
+        return NewsHolder(layout)
     }
 
     override fun getItemCount(): Int {
@@ -42,12 +40,8 @@ class NewsAdapter(
     }
 
 
-    override fun onBindViewHolder(holder: PostPhotoAdapter.NewsHolder, position: Int) {
-        val news = newsList[position]
-        news.let { holder.imAvatar?.setImageResource(it.avatarRes) }
-        holder.tvAuthorName?.text = news.authorName
-        holder.tvDate?.text = news.newsDate.toString()
-        holder.tvNewsContent?.text = news.newsText
+    override fun onBindViewHolder(holder: NewsHolder, position: Int) {
+
     }
 
 }
