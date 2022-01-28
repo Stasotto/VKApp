@@ -12,7 +12,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import com.example.vkapp.const.URL_AUTH_GET_TOKEN
 import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
@@ -66,31 +66,32 @@ class AuthorizationFragment : Fragment() {
     //я хз с чем это связано
     //Вызов метода по кнопке в функции снизу, если что
 
-    private fun retrofitResponse() {
-        GlobalScope.launch {
-
-            // Стас, чекни как работает @Query, надеюсь в рабочем коде тебе будет лучше понятно
-            // Я там тебе комменты оставил
-            val response = retrofitBuilder.newsJSONResponse(
-                getToken,
-                VERSION
-            ).awaitResponse()
-
-            if (response.isSuccessful) {
-                val data = response.body()!! // Здесь, кстати, не забываем "!!" после вызова тела,
-                // чтобы погружаясь в data class не втыкать "?" по 100500 раз в 1 строке
-                val k = (data.response.items[0].post_type).toString()
-                Log.d("CWW", k)
-            }
-        }
-    }
+//    private fun retrofitResponse() {
+//        GlobalScope.launch {
+//
+//            // Стас, чекни как работает @Query, надеюсь в рабочем коде тебе будет лучше понятно
+//            // Я там тебе комменты оставил
+//            val response = retrofitBuilder.newsJSONResponse(
+//                getToken,
+//                VERSION
+//            ).awaitResponse()
+//
+//            if (response.isSuccessful) {
+//                val data = response.body()!! // Здесь, кстати, не забываем "!!" после вызова тела,
+//                // чтобы погружаясь в data class не втыкать "?" по 100500 раз в 1 строке
+//                val k = (data.response.items[0].post_type).toString()
+//                Log.d("CWW", k)
+//            }
+//        }
+//    }
 
     private fun destroyView() {
 
         buttonDestroy.setOnClickListener {
-            retrofitResponse()
+//            retrofitResponse()
             webView.destroy()
-            findNavController().navigate(R.id.action_authorizationFragment_to_newsFragment)
+           view?.findNavController()?.navigate(R.id.action_authorizationFragment_to_newsFragment)
+
         }
     }
 
@@ -110,8 +111,6 @@ class AuthorizationFragment : Fragment() {
                 val s = accessS.substringBefore("%2526expires_in")
                 val token = s.substringAfter("%253D")
                 dm.token.value = token
-
-                Log.d("!!!", token)
 
                 return super.shouldOverrideUrlLoading(view, request)
             }
