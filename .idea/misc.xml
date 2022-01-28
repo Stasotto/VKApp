@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Apps/VKApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15989583333333332" />
+        <entry key="..\:/Android Apps/VKApp/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.15989583333333332" />
+        <entry key="..\:/Android Apps/VKApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.15989583333333332" />
         <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/fragment_authorization.xml" value="0.176" />
         <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/fragment_news.xml" value="0.14375" />
-        <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/fragment_post.xml" value="0.2" />
+        <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/fragment_post.xml" value="0.176" />
         <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/post_image_item.xml" value="0.176" />
         <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/post_item.xml" value="0.264" />
         <entry key="..\:/Kotlin Projects/VKApp/app/src/main/res/layout/activity_main.xml" value="0.19519927536231885" />
