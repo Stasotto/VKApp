@@ -57,6 +57,7 @@ class AuthorizationFragment : Fragment() {
         dm.token.observe(activity as LifecycleOwner, {
             getToken = it
             Log.d("CW", getToken)
+            dm.retrofitResponse()
         })
     }
 
