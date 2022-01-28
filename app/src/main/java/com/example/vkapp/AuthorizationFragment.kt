@@ -12,6 +12,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.findNavController
 import com.example.vkapp.const.URL_AUTH_GET_TOKEN
 import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
@@ -89,6 +90,7 @@ class AuthorizationFragment : Fragment() {
         buttonDestroy.setOnClickListener {
             retrofitResponse()
             webView.destroy()
+
         }
     }
 
@@ -108,8 +110,6 @@ class AuthorizationFragment : Fragment() {
                 val s = accessS.substringBefore("%2526expires_in")
                 val token = s.substringAfter("%253D")
                 dm.token.value = token
-
-                Log.d("!!!", token)
 
                 return super.shouldOverrideUrlLoading(view, request)
             }
