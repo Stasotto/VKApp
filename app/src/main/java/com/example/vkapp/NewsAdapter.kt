@@ -35,9 +35,7 @@ class NewsAdapter(private var newsList: MutableList<ModelMain>) :
         return NewsHolder(layout)
     }
 
-    override fun getItemCount(): Int {
-        return newsList.size
-    }
+    override fun getItemCount() = newsList.size
 
 
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
