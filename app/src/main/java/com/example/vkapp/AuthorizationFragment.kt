@@ -66,30 +66,31 @@ class AuthorizationFragment : Fragment() {
     //я хз с чем это связано
     //Вызов метода по кнопке в функции снизу, если что
 
-    private fun retrofitResponse() {
-        GlobalScope.launch {
-
-            // Стас, чекни как работает @Query, надеюсь в рабочем коде тебе будет лучше понятно
-            // Я там тебе комменты оставил
-            val response = retrofitBuilder.newsJSONResponse(
-                getToken,
-                VERSION
-            ).awaitResponse()
-
-            if (response.isSuccessful) {
-                val data = response.body()!! // Здесь, кстати, не забываем "!!" после вызова тела,
-                // чтобы погружаясь в data class не втыкать "?" по 100500 раз в 1 строке
-                val k = (data.response.items[0].post_type).toString()
-                Log.d("CWW", k)
-            }
-        }
-    }
+//    private fun retrofitResponse() {
+//        GlobalScope.launch {
+//
+//            // Стас, чекни как работает @Query, надеюсь в рабочем коде тебе будет лучше понятно
+//            // Я там тебе комменты оставил
+//            val response = retrofitBuilder.newsJSONResponse(
+//                getToken,
+//                VERSION
+//            ).awaitResponse()
+//
+//            if (response.isSuccessful) {
+//                val data = response.body()!! // Здесь, кстати, не забываем "!!" после вызова тела,
+//                // чтобы погружаясь в data class не втыкать "?" по 100500 раз в 1 строке
+//                val k = (data.response.items[0].post_type).toString()
+//                Log.d("CWW", k)
+//            }
+//        }
+//    }
 
     private fun destroyView() {
 
         buttonDestroy.setOnClickListener {
-            retrofitResponse()
+//            retrofitResponse()
             webView.destroy()
+           view?.findNavController()?.navigate(R.id.action_authorizationFragment_to_newsFragment)
 
         }
     }
