@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:hint="Author"
-                app:layout_constraintzTop_toTopOf="@+id/im_profile_id"
+                app:layout_constraintTop_toTopOf="@+id/im_profile_id"
                 app:layout_constraintStart_toEndOf="@+id/im_profile_id" />
 
             <TextView
