@@ -21,8 +21,6 @@ import retrofit2.awaitResponse
 
 class NewsFragment : Fragment() {
 
-//    private val newsAdapter: NewsAdapter by lazy { NewsAdapter(mutableListOf<ModelMain>()) }
-
     private var _newsBinding: FragmentNewsBinding? = null
     private val newsBinding get() = _newsBinding!!
 
@@ -78,13 +76,6 @@ class NewsFragment : Fragment() {
         }
     }
 
-
-//    private fun initRecycler() = with(newsBinding) {
-//        rvNewsId.adapter = newsAdapter
-//        rvNewsId.layoutManager = LinearLayoutManager(requireContext())
-//
-//
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
