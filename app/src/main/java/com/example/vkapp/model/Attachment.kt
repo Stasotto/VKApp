@@ -1,8 +1,7 @@
 package com.example.vkapp.model
 
 data class Attachment(
+    val audio: Audio,
     val photo: Photo,
-    val poll: Poll,
-    val type: String,
-    val video: Video
+    val type: String
 )

@@ -19,7 +19,7 @@ data class Poll(
     val is_board: Boolean,
     val multiple: Boolean,
     val owner_id: Int,
-    val photo: PhotoX,
+    val photo: PhotoXX,
     val question: String,
     val votes: Int
 )

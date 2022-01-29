@@ -1,7 +1,6 @@
 package com.example.vkapp.model
 
 data class Photo(
-    val access_key: String,
     val album_id: Int,
     val date: Int,
     val has_tags: Boolean,
@@ -9,6 +8,5 @@ data class Photo(
     val owner_id: Int,
     val post_id: Int,
     val sizes: List<Size>,
-    val text: String,
-    val user_id: Int
+    val text: String
 )
