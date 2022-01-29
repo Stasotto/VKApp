@@ -7,6 +7,7 @@ const val URL_AUTH_GET_TOKEN =
 const val BASE_URL_OAUTH = "https://api.vk.com/method/"
 const val NEWSFEED_GET = "newsfeed.get"
 const val VERSION = "5.131"
-const val s = "257d6937e5686d902866c0fbac1150d6723ba137c8915d7724123c34a8b2c60b78679121761b4f0749704"
+const val s =
+    "257d6937e5686d902866c0fbac1150d6723ba137c8915d7724123c34a8b2c60b78679121761b4f0749704"
 
 var getToken = ""

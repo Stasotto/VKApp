@@ -68,8 +68,10 @@ class NewsAdapter(private var newsList: ModelMain) :
 
         //view Date
         holder.date = (newsList.response.items[position].date).toLong()
-        holder.tvDate?.text = LocalDateTime.ofInstant(Instant.ofEpochMilli(holder.date*1000),
-            TimeZone.getDefault().toZoneId()).toString().substring(0, 10)
+        holder.tvDate?.text = LocalDateTime.ofInstant(
+            Instant.ofEpochMilli(holder.date * 1000),
+            TimeZone.getDefault().toZoneId()
+        ).toString().substring(0, 10)
 
         //get user photo and name
         GlobalScope.launch(Dispatchers.Main) {

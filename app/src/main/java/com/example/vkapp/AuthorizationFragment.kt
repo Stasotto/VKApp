@@ -8,18 +8,13 @@ import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.findNavController
 import com.example.vkapp.const.URL_AUTH_GET_TOKEN
-import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
 import com.example.vkapp.const.s
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.awaitResponse
 
 class AuthorizationFragment : Fragment() {
 
@@ -54,7 +49,7 @@ class AuthorizationFragment : Fragment() {
             Log.d("CW", getToken)
             Log.d("!!!CW", s.length.toString())
             Log.d("!!!CW", getToken.length.toString())
-            when(s.length) {
+            when (s.length) {
                 it.length -> destroyView()
             }
         })
@@ -86,8 +81,8 @@ class AuthorizationFragment : Fragment() {
     private fun destroyView() {
 
 //            retrofitResponse()
-            webView.destroy()
-           view?.findNavController()?.navigate(R.id.action_authorizationFragment_to_newsFragment)
+        webView.destroy()
+        view?.findNavController()?.navigate(R.id.action_authorizationFragment_to_newsFragment)
 
     }
 

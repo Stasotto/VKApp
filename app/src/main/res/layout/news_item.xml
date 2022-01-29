@@ -14,9 +14,9 @@
             android:id="@+id/im_profile_id"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_postAuthor_id"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:hint="date"
             app:layout_constraintStart_toStartOf="@+id/tv_postAuthor_id"
-            app:layout_constraintTop_toBottomOf="@+id/tv_postAuthor_id"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_postAuthor_id" />
 
         <TextView
             android:id="@+id/tv_post_id"
@@ -44,9 +44,9 @@
             app:layout_constraintTop_toBottomOf="@+id/im_profile_id" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-<View
-    android:layout_width="match_parent"
-    android:layout_height="4dp"
-    android:background="@color/black"
-    />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/black" />
 </androidx.cardview.widget.CardView>
