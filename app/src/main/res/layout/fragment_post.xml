@@ -32,4 +32,13 @@
         app:layout_constraintTop_toBottomOf="@id/rv_postImages_id"
         app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
+    <TextView
+        android:id="@+id/textView222"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/im_isLiked_id" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
