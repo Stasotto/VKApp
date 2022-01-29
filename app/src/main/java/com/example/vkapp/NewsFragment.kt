@@ -58,6 +58,7 @@ class NewsFragment : Fragment() {
         GlobalScope.launch(Dispatchers.Main) {
 
             val response = retrofitBuilder.newsJSONResponse(
+                "50",
                 getToken,
                 VERSION
             ).awaitResponse()

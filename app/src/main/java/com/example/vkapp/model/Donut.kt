@@ -1,5 +1,5 @@
 package com.example.vkapp.model
 
 data class Donut(
-    val placeholder: Placeholder
+    val is_donut: Boolean
 )
