@@ -90,5 +90,4 @@ class NewsAdapter(private var newsList: ModelMain) :
 
 
     }
-
 }
