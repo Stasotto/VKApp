@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
@@ -70,10 +68,6 @@ class NewsFragment : Fragment() {
                 adapter = NewsAdapter(responseBody)
                 adapter.notifyDataSetChanged()
                 recyclerView.adapter = adapter
-                adapter.setOnItemClickListener {
-                    val action = NewsFragmentDirections.actionNewsFragmentToPostFragment(it)
-                    findNavController().navigate(action)
-                }
             }
         }
     }
