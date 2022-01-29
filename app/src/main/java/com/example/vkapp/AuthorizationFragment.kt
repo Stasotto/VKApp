@@ -8,18 +8,13 @@ import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.findNavController
 import com.example.vkapp.const.URL_AUTH_GET_TOKEN
-import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
 import com.example.vkapp.const.s
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.awaitResponse
 
 class AuthorizationFragment : Fragment() {
 
@@ -54,40 +49,17 @@ class AuthorizationFragment : Fragment() {
             Log.d("CW", getToken)
             Log.d("!!!CW", s.length.toString())
             Log.d("!!!CW", getToken.length.toString())
-            when(s.length) {
+            when (s.length) {
                 it.length -> destroyView()
             }
         })
     }
 
-    //а вот здесь если вызывать, то все работает шикарно
-    //я хз с чем это связано
-    //Вызов метода по кнопке в функции снизу, если что
-
-//    private fun retrofitResponse() {
-//        GlobalScope.launch {
-//
-//            // Стас, чекни как работает @Query, надеюсь в рабочем коде тебе будет лучше понятно
-//            // Я там тебе комменты оставил
-//            val response = retrofitBuilder.newsJSONResponse(
-//                getToken,
-//                VERSION
-//            ).awaitResponse()
-//
-//            if (response.isSuccessful) {
-//                val data = response.body()!! // Здесь, кстати, не забываем "!!" после вызова тела,
-//                // чтобы погружаясь в data class не втыкать "?" по 100500 раз в 1 строке
-//                val k = (data.response.items[0].post_type).toString()
-//                Log.d("CWW", k)
-//            }
-//        }
-//    }
-
     private fun destroyView() {
 
 //            retrofitResponse()
-            webView.destroy()
-           view?.findNavController()?.navigate(R.id.action_authorizationFragment_to_newsFragment)
+        webView.destroy()
+        view?.findNavController()?.navigate(R.id.action_authorizationFragment_to_newsFragment)
 
     }
 

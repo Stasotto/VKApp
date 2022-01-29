@@ -8,11 +8,11 @@ import retrofit2.http.Query
 
 interface RetrofitService {
 
-    @GET("wall.get") // При вызове @Query знак "?" после метода @GET добавляется автоматически
+    @GET("wall.get")
     fun newsJSONResponse(
         @Query("count") count: String,
-        @Query("access_token") token: String, //а вот здесь после каждого вызова добавляется "&"
-        @Query("v") version: String // т.е. таким образом мы прописываем фул ссылку, а уже значения можем сами втыкать
+        @Query("access_token") token: String,
+        @Query("v") version: String
     ): Call<ModelMain>
 
     // https://api.vk.com/method/wall.get?access_token=TOKEN&v=5.131

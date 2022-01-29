@@ -1,6 +1,7 @@
 package com.example.vkapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +21,6 @@ import retrofit2.awaitResponse
 
 
 class NewsFragment : Fragment() {
-
-//    private val newsAdapter: NewsAdapter by lazy { NewsAdapter(mutableListOf<ModelMain>()) }
 
     private var _newsBinding: FragmentNewsBinding? = null
     private val newsBinding get() = _newsBinding!!
@@ -67,7 +66,7 @@ class NewsFragment : Fragment() {
 
             if (response.isSuccessful) {
                 responseBody = response.body()!!
-                adapter = NewsAdapter(responseBody)
+                adapter = NewsAdapter(responseBody, requireContext().applicationContext)
                 adapter.notifyDataSetChanged()
                 recyclerView.adapter = adapter
                 adapter.setOnItemClickListener {
@@ -78,13 +77,6 @@ class NewsFragment : Fragment() {
         }
     }
 
-
-//    private fun initRecycler() = with(newsBinding) {
-//        rvNewsId.adapter = newsAdapter
-//        rvNewsId.layoutManager = LinearLayoutManager(requireContext())
-//
-//
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
