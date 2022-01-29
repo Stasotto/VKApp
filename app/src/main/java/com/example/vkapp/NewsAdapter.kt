@@ -94,6 +94,5 @@ class NewsAdapter(private var newsList: ModelMain) :
                 Log.d("CWWW", "ERROR")
             }
         }
-
     }
 }
