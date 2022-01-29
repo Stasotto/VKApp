@@ -1,5 +1,6 @@
 package com.example.vkapp
 
+import android.content.Context
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,7 +29,7 @@ import java.util.*
 
 //для класса fragment_news.xml -> news_item
 
-class NewsAdapter(private var newsList: ModelMain) :
+class NewsAdapter(private var newsList: ModelMain, val context: Context) :
     RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
     private var itemListener: ((String) -> Unit)? = null
 
@@ -105,6 +106,7 @@ class NewsAdapter(private var newsList: ModelMain) :
                 }
             } catch (e: Exception) {
                 Log.d("CWWW", "ERROR")
+                Toast.makeText(context, "Please scroll slowly", Toast.LENGTH_SHORT).show()
             }
         }
     }

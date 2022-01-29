@@ -1,6 +1,7 @@
 package com.example.vkapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -65,7 +66,7 @@ class NewsFragment : Fragment() {
 
             if (response.isSuccessful) {
                 responseBody = response.body()!!
-                adapter = NewsAdapter(responseBody)
+                adapter = NewsAdapter(responseBody, requireContext().applicationContext)
                 adapter.notifyDataSetChanged()
                 recyclerView.adapter = adapter
                 adapter.setOnItemClickListener {
