@@ -62,8 +62,10 @@ class NewsAdapter(private var newsList: ModelMain) :
         holder.user_ids = newsList.response.items[position].from_id.toString()
         holder.tvNewsContent?.text = newsList.response.items[position].text
         if (holder.tvNewsContent?.text == "") {
-            holder.tvNewsContent?.text = "Post text is empty"
+            holder.tvNewsContent?.text = "Post text empty"
         }
+
+        //view Date
         holder.date = (newsList.response.items[position].date).toLong()
         holder.tvDate?.text = LocalDateTime.ofInstant(Instant.ofEpochMilli(holder.date*1000),
             TimeZone.getDefault().toZoneId()).toString().substring(0, 10)
@@ -78,6 +80,7 @@ class NewsAdapter(private var newsList: ModelMain) :
                     VERSION
                 ).awaitResponse()
                 if (responseAdapter.isSuccessful) {
+                    Log.d("CWWError", responseAdapter.message().toString())
                     val data = responseAdapter.body()!!
                     holder.tvAuthorName?.text =
                         data.response[0].first_name + " " + data.response[0].last_name
@@ -87,7 +90,6 @@ class NewsAdapter(private var newsList: ModelMain) :
                 Log.d("CWWW", "ERROR")
             }
         }
-
 
     }
 }
