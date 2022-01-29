@@ -15,6 +15,7 @@ import com.example.vkapp.model.ModelMain
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
 import java.time.Instant
@@ -72,6 +73,7 @@ class NewsAdapter(private var newsList: ModelMain) :
 
         //get user photo and name
         GlobalScope.launch(Dispatchers.Main) {
+            delay(500)
             try {
                 val responseAdapter = holder.retrofitBuild.getPhoto(
                     holder.user_ids,
