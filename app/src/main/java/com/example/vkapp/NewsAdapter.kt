@@ -17,6 +17,7 @@ import com.example.vkapp.model.ModelMain
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
 import java.time.Instant
@@ -74,14 +75,17 @@ class NewsAdapter(private var newsList: ModelMain) :
 
         }
         if (holder.tvNewsContent?.text == "") {
-            holder.tvNewsContent?.text = "Post text is empty"
+            holder.tvNewsContent?.text = "Post text empty"
         }
+
+        //view Date
         holder.date = (newsList.response.items[position].date).toLong()
         holder.tvDate?.text = LocalDateTime.ofInstant(Instant.ofEpochMilli(holder.date*1000),
             TimeZone.getDefault().toZoneId()).toString().substring(0, 10)
 
         //get user photo and name
         GlobalScope.launch(Dispatchers.Main) {
+            delay(500)
             try {
                 val responseAdapter = holder.retrofitBuild.getPhoto(
                     holder.user_ids,
@@ -90,6 +94,7 @@ class NewsAdapter(private var newsList: ModelMain) :
                     VERSION
                 ).awaitResponse()
                 if (responseAdapter.isSuccessful) {
+                    Log.d("CWWError", responseAdapter.message().toString())
                     val data = responseAdapter.body()!!
                     holder.tvAuthorName?.text =
                         data.response[0].first_name + " " + data.response[0].last_name
@@ -99,6 +104,6 @@ class NewsAdapter(private var newsList: ModelMain) :
                 Log.d("CWWW", "ERROR")
             }
         }
-    }
 
+    }
 }
