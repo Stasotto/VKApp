@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.internal.findRootView
 import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
 import com.example.vkapp.model.ModelMain
@@ -27,6 +29,11 @@ import java.util.*
 
 class NewsAdapter(private var newsList: ModelMain) :
     RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
+    private var itemListener: ((String) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (String) -> Unit) {
+        itemListener = listener
+    }
 
     class NewsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imAvatar: ImageView? = null
@@ -37,12 +44,14 @@ class NewsAdapter(private var newsList: ModelMain) :
         var retrofitBuild = RetrofitCreator().getUserAccessToken()
         var user_ids = ""
         var date: Long = 0
+        var root: ConstraintLayout?  = null
 
         init {
             imAvatar = itemView.findViewById(R.id.im_profile_id)
             tvAuthorName = itemView.findViewById(R.id.tv_postAuthor_id)
             tvDate = itemView.findViewById(R.id.tv_date_id)
             tvNewsContent = itemView.findViewById(R.id.tv_post_id)
+            root = itemView.findViewById(R.id.root)
 
         }
     }
@@ -59,9 +68,12 @@ class NewsAdapter(private var newsList: ModelMain) :
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
 //        holder.tvNewsContent?.text = newsList.response.items[position].text
-
         holder.user_ids = newsList.response.items[position].from_id.toString()
         holder.tvNewsContent?.text = newsList.response.items[position].text
+        holder.root?.setOnClickListener {
+            itemListener?.invoke(holder.tvNewsContent?.text.toString())
+
+        }
         if (holder.tvNewsContent?.text == "") {
             holder.tvNewsContent?.text = "Post text empty"
         }
