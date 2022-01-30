@@ -47,7 +47,6 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        initRecycler()
         recyclerView = view.findViewById(R.id.rv_news_id)
 
         news()
@@ -69,9 +68,10 @@ class NewsFragment : Fragment() {
                 adapter = NewsAdapter(responseBody, requireContext().applicationContext)
                 adapter.notifyDataSetChanged()
                 recyclerView.adapter = adapter
-                adapter.setOnItemClickListener {
-                    val action = NewsFragmentDirections.actionNewsFragmentToPostFragment(it)
+                adapter.setOnItemClickListener {test, id ->
+                    val action = NewsFragmentDirections.actionNewsFragmentToPostFragment(test, id)
                     findNavController().navigate(action)
+
                 }
             }
         }

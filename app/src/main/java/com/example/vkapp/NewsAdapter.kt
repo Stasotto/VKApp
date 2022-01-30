@@ -29,11 +29,11 @@ import java.util.*
 
 //для класса fragment_news.xml -> news_item
 
-class NewsAdapter(private var newsList: ModelMain, val context: Context) :
+class NewsAdapter(private var newsList: ModelMain, private val context: Context) :
     RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
-    private var itemListener: ((String) -> Unit)? = null
+    private var itemListener: ((String, String) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (String) -> Unit) {
+    fun setOnItemClickListener(listener: (String, String) -> Unit) {
         itemListener = listener
     }
 
@@ -47,6 +47,7 @@ class NewsAdapter(private var newsList: ModelMain, val context: Context) :
         var user_ids = ""
         var date: Long = 0
         var root: ConstraintLayout?  = null
+        var postID: String = ""
 
         init {
             imAvatar = itemView.findViewById(R.id.im_profile_id)
@@ -72,8 +73,13 @@ class NewsAdapter(private var newsList: ModelMain, val context: Context) :
 //        holder.tvNewsContent?.text = newsList.response.items[position].text
         holder.user_ids = newsList.response.items[position].from_id.toString()
         holder.tvNewsContent?.text = newsList.response.items[position].text
+        holder.postID = newsList.response.items[position].id.toString()
+
         holder.root?.setOnClickListener {
-            itemListener?.invoke(holder.tvNewsContent?.text.toString())
+            itemListener?.invoke(
+                holder.tvNewsContent?.text.toString(),
+                holder.postID
+            )
 
         }
         if (holder.tvNewsContent?.text == "") {

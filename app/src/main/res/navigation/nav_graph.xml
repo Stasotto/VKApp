@@ -28,6 +28,12 @@
             app:argType="string"
             app:nullable="false"
             />
+                    <argument
+            android:name="postID"
+            app:argType="string"
+            app:nullable="false"
+            />
+
         </action>
     </fragment>
     <fragment
@@ -40,5 +46,11 @@
             app:argType="string"
             app:nullable="false"
             />
+                <argument
+            android:name="postID"
+            app:argType="string"
+            app:nullable="false"
+            />
+
     </fragment>
 </navigation>
