@@ -52,7 +52,7 @@ class PostFragment : Fragment() {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val response = retrofitBuilder.getPostInfo(
-                    "231970122_2572",
+                    "${args.ownerId}_${args.postID}",
                     getToken
                 ).awaitResponse()
 
