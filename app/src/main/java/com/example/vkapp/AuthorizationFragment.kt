@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
@@ -16,7 +17,7 @@ import com.example.vkapp.const.URL_AUTH_GET_TOKEN
 import com.example.vkapp.const.getToken
 import com.example.vkapp.const.s
 
-class AuthorizationFragment : Fragment() {
+class AuthorizationFragment : Fragment(),IsConnectable {
 
     private lateinit var webView: WebView
     private var urlLink: String = ""
@@ -42,8 +43,15 @@ class AuthorizationFragment : Fragment() {
         webView = requireView().findViewById(R.id.web_view)
         webView.settings.javaScriptEnabled
 
-        loadAuth()
-
+        val connectionFlag = activity?.let { isOnline(it.applicationContext) }
+        if (connectionFlag == true) {
+            Toast.makeText(activity?.applicationContext, "Connected", Toast.LENGTH_SHORT).show()
+            loadAuth()
+        }
+        else{
+            view.findNavController().navigate(R.id.action_authorizationFragment_to_netWorkErrFragment)
+            Toast.makeText(activity?.applicationContext, "No Internet Connection", Toast.LENGTH_SHORT).show()
+        }
         dm.token.observe(activity as LifecycleOwner, {
             getToken = it
             Log.d("CW", getToken)
@@ -60,7 +68,6 @@ class AuthorizationFragment : Fragment() {
 //            retrofitResponse()
         webView.destroy()
         view?.findNavController()?.navigate(R.id.action_authorizationFragment_to_newsFragment)
-
     }
 
 

@@ -14,6 +14,9 @@
             android:id="@+id/action_authorizationFragment_to_newsFragment"
             app:destination="@id/newsFragment">
         </action>
+        <action
+            android:id="@+id/action_authorizationFragment_to_netWorkErrFragment"
+            app:destination="@id/netWorkErrFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -52,5 +55,14 @@
             app:nullable="false"
             />
 
+    </fragment>
+    <fragment
+        android:id="@+id/netWorkErrFragment"
+        android:name="com.example.vkapp.NetWorkErrFragment"
+        android:label="fragment_net_work_err"
+        tools:layout="@layout/fragment_net_work_err" >
+        <action
+            android:id="@+id/action_netWorkErrFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
     </fragment>
 </navigation>

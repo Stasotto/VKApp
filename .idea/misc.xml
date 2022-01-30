@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/fragment_authorization.xml" value="0.176" />
+        <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/fragment_net_work_err.xml" value="0.176" />
         <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/fragment_news.xml" value="0.14375" />
         <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/fragment_post.xml" value="0.2" />
         <entry key="..\:/Android Apps/VKApp/app/src/main/res/layout/post_image_item.xml" value="0.176" />
