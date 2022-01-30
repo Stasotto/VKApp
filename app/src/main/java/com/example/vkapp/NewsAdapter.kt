@@ -45,7 +45,7 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
         var retrofitBuild = RetrofitCreator().getUserAccessToken()
         var user_ids = ""
         var date: Long = 0
-        var root: ConstraintLayout?  = null
+        var root: ConstraintLayout? = null
         var postID: String = ""
         var owher_id: String = ""
 

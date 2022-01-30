@@ -52,7 +52,7 @@ class PostFragment : Fragment() {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val response = retrofitBuilder.getPostInfo(
-                    "${args.ownerId}_${args.postID}",
+                    "231970122_2572",
                     getToken
                 ).awaitResponse()
 
@@ -105,11 +105,11 @@ class PostFragment : Fragment() {
     private fun addLike() {
         GlobalScope.launch(Dispatchers.Main) {
             try {
-               val response = retrofitBuilder.addLike(
+                val response = retrofitBuilder.addLike(
                     args.postID,
                     getToken
                 ).awaitResponse()
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val data = response.body()!!
                     binding.countOfLikes.text = data.response.likes.toString()
                     binding.imIsLikedId.setImageResource(R.drawable.ic_baseline_favorite_24)
@@ -122,14 +122,15 @@ class PostFragment : Fragment() {
 
         }
     }
+
     private fun deleteLike() {
         GlobalScope.launch(Dispatchers.Main) {
             try {
-               val response =  retrofitBuilder.deleteLike(
+                val response = retrofitBuilder.deleteLike(
                     args.postID,
                     getToken
                 ).awaitResponse()
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val data = response.body()!!
                     binding.countOfLikes.text = data.response.likes.toString()
                     binding.imIsLikedId.setImageResource(R.drawable.ic_baseline_favorite_border_24)

@@ -2,9 +2,11 @@ package com.example.vkapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -54,25 +56,31 @@ class NewsFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun news() {
         GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val response = retrofitBuilder.newsJSONResponse(
+                    "50",
+                    getToken,
+                    VERSION
+                ).awaitResponse()
 
-            val response = retrofitBuilder.newsJSONResponse(
-                "50",
-                getToken,
-                VERSION
-            ).awaitResponse()
+                if (response.isSuccessful) {
+                    responseBody = response.body()!!
+                    adapter = NewsAdapter(responseBody, requireContext().applicationContext)
+                    adapter.notifyDataSetChanged()
+                    recyclerView.adapter = adapter
+                    adapter.setOnItemClickListener { test, id ->
+                        val action =
+                            NewsFragmentDirections.actionNewsFragmentToPostFragment(test, id)
+                        findNavController().navigate(action)
 
-            if (response.isSuccessful) {
-                responseBody = response.body()!!
-                adapter = NewsAdapter(responseBody, requireContext().applicationContext)
-                adapter.notifyDataSetChanged()
-                recyclerView.adapter = adapter
-                adapter.setOnItemClickListener {test, id ->
-                    val action = NewsFragmentDirections.actionNewsFragmentToPostFragment(test, id)
-                    findNavController().navigate(action)
-
+                    }
                 }
+            } catch (e: Exception) {
+                Log.d("error", "ERROR")
+                news()
             }
         }
+
     }
 
 

@@ -57,7 +57,6 @@ class AuthorizationFragment : Fragment() {
 
     private fun destroyView() {
 
-//            retrofitResponse()
         webView.destroy()
         view?.findNavController()?.navigate(R.id.action_authorizationFragment_to_newsFragment)
 

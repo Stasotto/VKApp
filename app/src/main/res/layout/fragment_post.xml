@@ -11,22 +11,21 @@
         android:id="@+id/repost_text_page_owner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="#1E41BF"
         android:gravity="center"
-        />
+        android:textColor="#1E41BF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/post_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/repost_text_page_owner"
-        app:layout_constraintStart_toStartOf="@+id/repost_text_page_owner"
-        app:layout_constraintEnd_toEndOf="@+id/repost_text_page_owner"
+        android:gravity="center"
         android:textColor="@color/black"
-        android:gravity="center"/>
+        app:layout_constraintEnd_toEndOf="@+id/repost_text_page_owner"
+        app:layout_constraintStart_toStartOf="@+id/repost_text_page_owner"
+        app:layout_constraintTop_toBottomOf="@+id/repost_text_page_owner" />
 
 
     <ImageView
@@ -34,10 +33,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/im_isLiked_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/post_text"
-        app:layout_constraintBottom_toTopOf="@+id/im_isLiked_id">
+        app:layout_constraintTop_toBottomOf="@id/post_text">
 
     </ImageView>
 
@@ -47,12 +46,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
         android:text="next"
         android:textColor="@color/black"
-        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@id/im_isLiked_id"
-        app:layout_constraintTop_toTopOf="@id/im_isLiked_id"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/im_isLiked_id" />
 
 
     <ImageView
