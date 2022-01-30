@@ -1,19 +1,17 @@
 package com.example.vkapp
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
 import com.example.vkapp.databinding.FragmentNewsBinding
-import com.example.vkapp.model.ModelMain
+import com.example.vkapp.model_package.model.ModelMain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

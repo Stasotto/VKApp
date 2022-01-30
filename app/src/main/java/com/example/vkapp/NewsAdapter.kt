@@ -12,10 +12,9 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.internal.findRootView
 import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
-import com.example.vkapp.model.ModelMain
+import com.example.vkapp.model_package.model.ModelMain
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -48,6 +47,7 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
         var date: Long = 0
         var root: ConstraintLayout?  = null
         var postID: String = ""
+        var owher_id: String = ""
 
         init {
             imAvatar = itemView.findViewById(R.id.im_profile_id)
@@ -73,11 +73,14 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
 //        holder.tvNewsContent?.text = newsList.response.items[position].text
         holder.user_ids = newsList.response.items[position].from_id.toString()
         holder.tvNewsContent?.text = newsList.response.items[position].text
+
+        //send param to PostFragment for create Retrofit response
         holder.postID = newsList.response.items[position].id.toString()
+        holder.owher_id = newsList.response.items[position].owner_id.toString()
 
         holder.root?.setOnClickListener {
             itemListener?.invoke(
-                holder.tvNewsContent?.text.toString(),
+                holder.owher_id,
                 holder.postID
             )
 

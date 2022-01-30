@@ -6,39 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".PostFragment">
 
-    <TextView
-        android:id="@+id/tv_postDetails_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_postImages_id"
+    <TextView
+        android:id="@+id/repost_text_page_owner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#1E41BF"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/post_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/repost_text_page_owner"
+        app:layout_constraintStart_toStartOf="@+id/repost_text_page_owner"
+        app:layout_constraintEnd_toEndOf="@+id/repost_text_page_owner"
+        android:textColor="@color/black"
+        android:gravity="center"/>
+
+
+    <ImageView
+        android:id="@+id/image_post_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_postDetails_id" />
+        app:layout_constraintTop_toBottomOf="@id/post_text"
+        app:layout_constraintBottom_toTopOf="@+id/im_isLiked_id">
+
+    </ImageView>
+
+    <Button
+        android:id="@+id/button_next_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="next"
+        app:layout_constraintBottom_toBottomOf="@id/im_isLiked_id"
+        app:layout_constraintTop_toTopOf="@id/im_isLiked_id"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <ImageView
         android:id="@+id/im_isLiked_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_postImages_id"
         app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
     <TextView
-        android:id="@+id/textView222"
+        android:id="@+id/count_of_likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/im_isLiked_id" />
+        app:layout_constraintStart_toEndOf="@+id/im_isLiked_id"
+        app:layout_constraintTop_toTopOf="@+id/im_isLiked_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
