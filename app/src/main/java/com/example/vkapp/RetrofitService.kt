@@ -2,7 +2,9 @@ package com.example.vkapp
 
 import com.example.vkapp.const.VERSION
 import com.example.vkapp.model.ModelMain
-import com.example.vkapp.model_add_like.ModelAddDeleteLike
+import com.example.vkapp.model_add_like.ModelAddLike
+import com.example.vkapp.model_delete_like.ModelDeleteLike
+import com.example.vkapp.model_post_info.ModelPostInfo
 import com.example.vkapp.model_user_photo_and_name.ModelMainUserPhotoAndName
 import retrofit2.Call
 import retrofit2.http.GET
@@ -36,7 +38,7 @@ interface RetrofitService {
         @Query("post_id") post_id: String,
         @Query("access_token") token: String,
         @Query("v") v: String = VERSION
-    ): Call<ModelAddDeleteLike>
+    ): Call<ModelAddLike>
 
     // https://api.vk.com/method/wall.addLike?post_id=POSTID&access_token=TOKEN&v=5.131
 
@@ -46,7 +48,18 @@ interface RetrofitService {
         @Query("post_id") post_id: String,
         @Query("access_token") token: String,
         @Query("v") v: String = VERSION
-    ): Call<ModelAddDeleteLike>
+    ): Call<ModelDeleteLike>
+
     // https://api.vk.com/method/wall.deleteLike?&post_id=POSTID&access_token=TOKEN&v=5.131
+
+
+    @GET("wall.getById")
+    fun getPostInfo(
+        @Query("posts") posts: String,
+        @Query("access_token") token: String,
+        @Query("v") v: String = VERSION
+    ): Call<ModelPostInfo>
+
+    // https://api.vk.com/method/wall.getById?posts=111036600_1577&access_token=TOKEN&v=5.131
 
 }

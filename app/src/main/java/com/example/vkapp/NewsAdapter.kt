@@ -48,6 +48,7 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
         var date: Long = 0
         var root: ConstraintLayout?  = null
         var postID: String = ""
+        var owher_id: String = ""
 
         init {
             imAvatar = itemView.findViewById(R.id.im_profile_id)
@@ -73,11 +74,14 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
 //        holder.tvNewsContent?.text = newsList.response.items[position].text
         holder.user_ids = newsList.response.items[position].from_id.toString()
         holder.tvNewsContent?.text = newsList.response.items[position].text
+
+        //send param to PostFragment for create Retrofit response
         holder.postID = newsList.response.items[position].id.toString()
+        holder.owher_id = newsList.response.items[position].owner_id.toString()
 
         holder.root?.setOnClickListener {
             itemListener?.invoke(
-                holder.tvNewsContent?.text.toString(),
+                holder.owher_id,
                 holder.postID
             )
 
