@@ -27,7 +27,7 @@ class PostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().findViewById<TextView>(R.id.textView222).text = args.data
+        requireActivity().findViewById<TextView>(R.id.textView222).text = args.postID
     }
 
 }
