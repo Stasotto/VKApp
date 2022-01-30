@@ -12,10 +12,9 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.internal.findRootView
 import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
-import com.example.vkapp.model.ModelMain
+import com.example.vkapp.model_package.model.ModelMain
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

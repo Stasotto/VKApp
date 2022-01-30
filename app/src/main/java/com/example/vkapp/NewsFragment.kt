@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
 import com.example.vkapp.databinding.FragmentNewsBinding
-import com.example.vkapp.model.ModelMain
+import com.example.vkapp.model_package.model.ModelMain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
