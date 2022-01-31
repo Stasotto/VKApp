@@ -10,11 +10,13 @@ import androidx.navigation.fragment.navArgs
 import com.example.vkapp.const.getToken
 import com.example.vkapp.databinding.FragmentPostBinding
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
 
+@DelicateCoroutinesApi
 class PostFragment : Fragment() {
     private val args by navArgs<PostFragmentArgs>()
 
@@ -43,6 +45,81 @@ class PostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         postDetails()
+        attachment()
+    }
+
+
+    private fun attachment() {
+        val picasso = Picasso.get()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val response = retrofitBuilder.getPostInfo(
+                    "${args.ownerId}_${args.postID}",
+                    getToken
+                ).awaitResponse()
+
+                if (response.isSuccessful) {
+                    var setImgPos = 0
+                    val data = response.body()!!.response[0]
+                    binding.countOfLikes.text = data.likes.count.toString()
+
+                    binding.imIsLikedId.setOnClickListener {
+                        addLike()
+                    }
+
+                    if (data.text != "") {
+                        binding.repostTextPageOwner.text = "Author's text: ${data.text}"
+                    }
+
+                    val imageSize = data.attachments[setImgPos].photo.sizes.size - 2
+
+                    picasso.load(data.attachments[setImgPos].photo.sizes[imageSize].url)
+                        .into(binding.imagePostContent)
+
+                    binding.scrollPreviously.setOnClickListener {
+                        setImgPos-=1
+                        Log.d("CW", setImgPos.toString())
+                        if (setImgPos == -1) {
+                            setImgPos = data.attachments.size-1
+                        }
+                        try {
+                            picasso.load(data.attachments[setImgPos].photo.sizes[imageSize].url)
+                                .into(binding.imagePostContent)
+                        } catch (e: Exception) {
+                            Log.d("CW", setImgPos.toString())
+                            // catch exception if type of attachment is not a photo (video or other)
+                            // and revive to 0 position
+                            setImgPos = 0
+                            picasso.load(data.attachments[setImgPos].photo.sizes[imageSize].url)
+                                .into(binding.imagePostContent)
+                        }
+                    }
+
+                    binding.scrollNext.setOnClickListener {
+                        setImgPos += 1
+                        if (setImgPos == data.attachments.size) {
+                            setImgPos = 0
+                        }
+                        try {
+                            picasso.load(data.attachments[setImgPos].photo.sizes[imageSize].url)
+                                .into(binding.imagePostContent)
+                        } catch (e: Exception) {
+                            Log.d("adaw", "awd")
+                            // catch exception if type of attachment is not a photo (video or other)
+                            // and revive to 0 position
+                            setImgPos = 0
+                            picasso.load(data.attachments[setImgPos].photo.sizes[imageSize].url)
+                                .into(binding.imagePostContent)
+                        }
+
+                    }
+
+                }
+            } catch (e: Exception) {
+                Log.d("error", "ERROR")
+            }
+        }
     }
 
 
@@ -57,39 +134,61 @@ class PostFragment : Fragment() {
                 ).awaitResponse()
 
                 if (response.isSuccessful) {
-                    val data = response.body()!!
+                    val data = response.body()!!.response[0]
+                    val copyHistory = data.copy_history[0]
                     var setImgPos = 0
-                    binding.countOfLikes.text = data.response[0].likes.count.toString()
+                    binding.countOfLikes.text = data.likes.count.toString()
 
                     binding.imIsLikedId.setOnClickListener {
                         addLike()
                     }
 
-                    if (data.response[0].text != "") {
-                        binding.repostTextPageOwner.text = "Author's text: ${data.response[0].text}"
+                    if (data.text != "") {
+                        binding.repostTextPageOwner.text = "Author's text: ${data.text}"
                     }
 
-                    val imageSize =
-                        data.response[0].copy_history[0].attachments[0].photo.sizes.size - 1
-                    binding.postText.text = data.response[0].copy_history[0].text
 
-                    picasso.load(data.response[0].copy_history[0].attachments[setImgPos].photo.sizes[imageSize].url)
+
+                    val imageSize =
+                        copyHistory.attachments[0].photo.sizes.size - 2
+                    binding.postText.text = copyHistory.text
+
+                    picasso.load(copyHistory.attachments[setImgPos].photo.sizes[imageSize].url)
                         .into(binding.imagePostContent)
 
-                    binding.buttonNextPhoto.setOnClickListener {
+                    binding.scrollNext.setOnClickListener {
                         setImgPos += 1
-                        if (setImgPos == data.response[0].copy_history[0].attachments.size) {
+                        if (setImgPos == copyHistory.attachments.size) {
                             setImgPos = 0
                         }
                         try {
-                            picasso.load(data.response[0].copy_history[0].attachments[setImgPos].photo.sizes[imageSize].url)
+                            picasso.load(copyHistory.attachments[setImgPos].photo.sizes[imageSize].url)
                                 .into(binding.imagePostContent)
                         } catch (e: Exception) {
                             Log.d("adaw", "awd")
                             // catch exception if type of attachment is not a photo (video or other)
                             // and revive to 0 position
                             setImgPos = 0
-                            picasso.load(data.response[0].copy_history[0].attachments[setImgPos].photo.sizes[imageSize].url)
+                            picasso.load(copyHistory.attachments[setImgPos].photo.sizes[imageSize].url)
+                                .into(binding.imagePostContent)
+                        }
+
+                    }
+
+                    binding.scrollPreviously.setOnClickListener {
+                        setImgPos += 1
+                        if (setImgPos == copyHistory.attachments.size) {
+                            setImgPos = 0
+                        }
+                        try {
+                            picasso.load(copyHistory.attachments[setImgPos].photo.sizes[imageSize].url)
+                                .into(binding.imagePostContent)
+                        } catch (e: Exception) {
+                            Log.d("adaw", "awd")
+                            // catch exception if type of attachment is not a photo (video or other)
+                            // and revive to 0 position
+                            setImgPos = 0
+                            picasso.load(copyHistory.attachments[setImgPos].photo.sizes[imageSize].url)
                                 .into(binding.imagePostContent)
                         }
 
