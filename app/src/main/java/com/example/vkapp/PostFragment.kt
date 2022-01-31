@@ -12,6 +12,7 @@ import com.example.vkapp.const.getToken
 import com.example.vkapp.databinding.FragmentPostBinding
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
+import okhttp3.Headers.Companion.toHeaders
 import retrofit2.awaitResponse
 
 @SuppressLint("SetTextI18n")
@@ -252,11 +253,15 @@ class PostFragment : Fragment() {
 
     private fun showHideButtonView() {
         GlobalScope.launch(Dispatchers.Main) {
-            binding.buttonLeft.visibility = View.VISIBLE
-            binding.buttonRight.visibility = View.VISIBLE
-            delay(1500)
-            binding.buttonLeft.visibility = View.INVISIBLE
-            binding.buttonRight.visibility = View.INVISIBLE
+            try {
+                binding.buttonLeft.visibility = View.VISIBLE
+                binding.buttonRight.visibility = View.VISIBLE
+                delay(1500)
+                binding.buttonLeft.visibility = View.INVISIBLE
+                binding.buttonRight.visibility = View.INVISIBLE
+            }catch (e:Exception){
+                Log.d("!!!","error")
+            }
         }
     }
 
