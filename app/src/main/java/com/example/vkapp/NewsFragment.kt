@@ -1,12 +1,13 @@
 package com.example.vkapp
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -14,11 +15,15 @@ import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
 import com.example.vkapp.databinding.FragmentNewsBinding
 import com.example.vkapp.model_package.model.ModelMain
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
 
+@DelicateCoroutinesApi
+@SuppressLint("NotifyDataSetChanged")
+@RequiresApi(Build.VERSION_CODES.O)
 
 class NewsFragment : Fragment() {
 
@@ -30,10 +35,6 @@ class NewsFragment : Fragment() {
     lateinit var adapter: NewsAdapter
     lateinit var recyclerView: RecyclerView
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,8 +53,6 @@ class NewsFragment : Fragment() {
         news()
     }
 
-
-    @SuppressLint("NotifyDataSetChanged")
     private fun news() {
         GlobalScope.launch(Dispatchers.Main) {
             try {

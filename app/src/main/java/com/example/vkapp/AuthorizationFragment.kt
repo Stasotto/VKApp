@@ -21,12 +21,6 @@ class AuthorizationFragment : Fragment() {
     private lateinit var webView: WebView
     private var urlLink: String = ""
     private val dm: TokenData by activityViewModels()
-    var retrofitBuilder = RetrofitCreator().getUserAccessToken()
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
