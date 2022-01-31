@@ -31,8 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:textSize="20sp"
                 android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@id/im_profile_id"
                 app:layout_constraintTop_toTopOf="@+id/im_profile_id" />
 
@@ -47,8 +47,8 @@
                 android:id="@+id/tv_post_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/im_profile_id" />
 
@@ -63,6 +63,5 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="@drawable/gradient_list"
-
-        app:layout_constraintTop_toBottomOf="@id/cardView"/>
+        app:layout_constraintTop_toBottomOf="@id/cardView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

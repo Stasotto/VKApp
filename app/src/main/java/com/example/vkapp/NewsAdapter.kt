@@ -1,5 +1,6 @@
 package com.example.vkapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.AnimationDrawable
 import android.os.Build
@@ -7,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -18,17 +18,15 @@ import com.example.vkapp.const.VERSION
 import com.example.vkapp.const.getToken
 import com.example.vkapp.model_package.model.ModelMain
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.awaitResponse
 import java.time.Instant
 import java.time.LocalDateTime
 import java.util.*
 
-
-//для класса fragment_news.xml -> news_item
+@DelicateCoroutinesApi
+@SuppressLint("SetTextI18n")
+@RequiresApi(Build.VERSION_CODES.O)
 
 class NewsAdapter(private var newsList: ModelMain, private val context: Context) :
     RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
@@ -73,8 +71,6 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
 
     override fun getItemCount() = newsList.response.items.size
 
-
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
         holder.user_ids = newsList.response.items[position].from_id.toString()
         holder.tvNewsContent?.text = newsList.response.items[position].text

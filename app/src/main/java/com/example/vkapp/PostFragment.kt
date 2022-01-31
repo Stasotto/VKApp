@@ -1,5 +1,6 @@
 package com.example.vkapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,12 +11,10 @@ import androidx.navigation.fragment.navArgs
 import com.example.vkapp.const.getToken
 import com.example.vkapp.databinding.FragmentPostBinding
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.awaitResponse
 
+@SuppressLint("SetTextI18n")
 @DelicateCoroutinesApi
 class PostFragment : Fragment() {
     private val args by navArgs<PostFragmentArgs>()
@@ -48,7 +47,6 @@ class PostFragment : Fragment() {
         attachment()
     }
 
-
     private fun attachment() {
         val picasso = Picasso.get()
 
@@ -60,11 +58,12 @@ class PostFragment : Fragment() {
                 ).awaitResponse()
 
                 if (response.isSuccessful) {
+                    showHideButtonView()
                     var setImgPos = 0
                     val data = response.body()!!.response[0]
                     binding.countOfLikes.text = data.likes.count.toString()
 
-                    if (data.likes.can_like == 0){
+                    if (data.likes.can_like == 0) {
                         binding.imIsLikedId.setImageResource(R.drawable.ic_baseline_favorite_24)
                     }
 
@@ -82,10 +81,11 @@ class PostFragment : Fragment() {
                         .into(binding.imagePostContent)
 
                     binding.scrollPreviously.setOnClickListener {
-                        setImgPos-=1
+                        showHideButtonView()
+                        setImgPos -= 1
                         Log.d("CW", setImgPos.toString())
                         if (setImgPos == -1) {
-                            setImgPos = data.attachments.size-1
+                            setImgPos = data.attachments.size - 1
                         }
                         try {
                             picasso.load(data.attachments[setImgPos].photo.sizes[imageSize].url)
@@ -101,6 +101,7 @@ class PostFragment : Fragment() {
                     }
 
                     binding.scrollNext.setOnClickListener {
+                        showHideButtonView()
                         setImgPos += 1
                         if (setImgPos == data.attachments.size) {
                             setImgPos = 0
@@ -138,12 +139,13 @@ class PostFragment : Fragment() {
                 ).awaitResponse()
 
                 if (response.isSuccessful) {
+                    showHideButtonView()
                     val data = response.body()!!.response[0]
                     val copyHistory = data.copy_history[0]
                     var setImgPos = 0
                     binding.countOfLikes.text = data.likes.count.toString()
 
-                    if (data.likes.can_like == 0){
+                    if (data.likes.can_like == 0) {
                         binding.imIsLikedId.setImageResource(R.drawable.ic_baseline_favorite_24)
                     }
 
@@ -156,7 +158,6 @@ class PostFragment : Fragment() {
                     }
 
 
-
                     val imageSize =
                         copyHistory.attachments[0].photo.sizes.size - 2
                     binding.postText.text = copyHistory.text
@@ -165,6 +166,7 @@ class PostFragment : Fragment() {
                         .into(binding.imagePostContent)
 
                     binding.scrollNext.setOnClickListener {
+                        showHideButtonView()
                         setImgPos += 1
                         if (setImgPos == copyHistory.attachments.size) {
                             setImgPos = 0
@@ -184,6 +186,7 @@ class PostFragment : Fragment() {
                     }
 
                     binding.scrollPreviously.setOnClickListener {
+                        showHideButtonView()
                         setImgPos += 1
                         if (setImgPos == copyHistory.attachments.size) {
                             setImgPos = 0
@@ -247,6 +250,17 @@ class PostFragment : Fragment() {
             }
 
 
+        }
+    }
+
+
+    private fun showHideButtonView() {
+        GlobalScope.launch(Dispatchers.Main) {
+            binding.buttonLeft.visibility = View.VISIBLE
+            binding.buttonRight.visibility = View.VISIBLE
+            delay(1500)
+            binding.buttonLeft.visibility = View.INVISIBLE
+            binding.buttonRight.visibility = View.INVISIBLE
         }
     }
 
