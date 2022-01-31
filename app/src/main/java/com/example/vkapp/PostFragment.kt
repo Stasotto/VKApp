@@ -64,6 +64,10 @@ class PostFragment : Fragment() {
                     val data = response.body()!!.response[0]
                     binding.countOfLikes.text = data.likes.count.toString()
 
+                    if (data.likes.can_like == 0){
+                        binding.imIsLikedId.setImageResource(R.drawable.ic_baseline_favorite_24)
+                    }
+
                     binding.imIsLikedId.setOnClickListener {
                         addLike()
                     }
@@ -138,6 +142,10 @@ class PostFragment : Fragment() {
                     val copyHistory = data.copy_history[0]
                     var setImgPos = 0
                     binding.countOfLikes.text = data.likes.count.toString()
+
+                    if (data.likes.can_like == 0){
+                        binding.imIsLikedId.setImageResource(R.drawable.ic_baseline_favorite_24)
+                    }
 
                     binding.imIsLikedId.setOnClickListener {
                         addLike()
