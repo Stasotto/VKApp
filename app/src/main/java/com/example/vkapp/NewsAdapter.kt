@@ -1,11 +1,13 @@
 package com.example.vkapp
 
 import android.content.Context
+import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -48,6 +50,8 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
         var root: ConstraintLayout? = null
         var postID: String = ""
         var owher_id: String = ""
+        var constraintLayout: View? = null
+        var animationDrawable: AnimationDrawable? = null
 
         init {
             imAvatar = itemView.findViewById(R.id.im_profile_id)
@@ -55,6 +59,8 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
             tvDate = itemView.findViewById(R.id.tv_date_id)
             tvNewsContent = itemView.findViewById(R.id.tv_post_id)
             root = itemView.findViewById(R.id.root)
+
+            constraintLayout = itemView.findViewById(R.id.string)
 
         }
     }
@@ -70,7 +76,6 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
-//        holder.tvNewsContent?.text = newsList.response.items[position].text
         holder.user_ids = newsList.response.items[position].from_id.toString()
         holder.tvNewsContent?.text = newsList.response.items[position].text
 
@@ -83,9 +88,15 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
                 holder.owher_id,
                 holder.postID
             )
-
         }
 
+        // split string animation
+        holder.animationDrawable = holder.constraintLayout?.background as AnimationDrawable
+        holder.animationDrawable!!.setEnterFadeDuration(1000)
+        holder.animationDrawable!!.setExitFadeDuration(1000)
+        holder.animationDrawable!!.start()
+
+        // set NewContent text
         try {
             if (holder.tvNewsContent?.text == "") {
                 holder.tvNewsContent?.text = newsList.response.items[position].copy_history[0].text
@@ -95,10 +106,6 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
             Log.d("Text", "Text")
         }
 
-
-//        if (holder.tvNewsContent?.text == "") {
-//                holder.tvNewsContent?.text = "Post text empty"
-//        }
 
         //view Date
         holder.date = (newsList.response.items[position].date).toLong()
