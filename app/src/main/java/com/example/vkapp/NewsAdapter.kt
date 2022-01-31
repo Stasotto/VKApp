@@ -85,9 +85,20 @@ class NewsAdapter(private var newsList: ModelMain, private val context: Context)
             )
 
         }
-        if (holder.tvNewsContent?.text == "") {
-            holder.tvNewsContent?.text = "Post text empty"
+
+        try {
+            if (holder.tvNewsContent?.text == "") {
+                holder.tvNewsContent?.text = newsList.response.items[position].copy_history[0].text
+            }
+
+        } catch (e: Exception) {
+            Log.d("Text", "Text")
         }
+
+
+//        if (holder.tvNewsContent?.text == "") {
+//                holder.tvNewsContent?.text = "Post text empty"
+//        }
 
         //view Date
         holder.date = (newsList.response.items[position].date).toLong()
