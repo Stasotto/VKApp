@@ -27,32 +27,55 @@
         app:layout_constraintStart_toStartOf="@+id/repost_text_page_owner"
         app:layout_constraintTop_toBottomOf="@+id/repost_text_page_owner" />
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toTopOf="@+id/im_isLiked_id"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/post_text">
 
     <ImageView
         android:id="@+id/image_post_content"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/im_isLiked_id"
+        app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/post_text">
+        app:layout_constraintTop_toBottomOf="parent"/>
+        />
+    <View
+        android:id="@+id/scroll_previously"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toStartOf="@+id/toolbar_center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-    </ImageView>
-
-    <Button
-        android:id="@+id/button_next_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@android:color/transparent"
-        android:text="next"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/im_isLiked_id"
+    <View
+        android:id="@+id/scroll_next"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@+id/toolbar_center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/im_isLiked_id" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
+    <View
+        android:id="@+id/toolbar_center"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/im_isLiked_id"
@@ -61,6 +84,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
     <TextView
@@ -71,5 +95,7 @@
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/im_isLiked_id"
         app:layout_constraintTop_toTopOf="@+id/im_isLiked_id" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

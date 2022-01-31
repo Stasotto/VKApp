@@ -20,5 +20,6 @@ data class Response(
     val reposts: Reposts,
     val short_text_rate: Double,
     val text: String,
-    val views: Views
+    val views: Views,
+    val attachments: List<Attachment>
 )
