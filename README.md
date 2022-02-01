@@ -27,3 +27,4 @@
 
 •	Использование паттернов проектирования - опциональны
 
+В проекте использованы: ViewBinding, Kotlin Coroutines, Retrofit, Picasso, JetPack Navigation
