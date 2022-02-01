@@ -25,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 
 class AuthorizationFragment : Fragment() {
@@ -73,24 +74,29 @@ class AuthorizationFragment : Fragment() {
 
     private fun loadAuth() {
 
-        webView.loadUrl(URL_AUTH_GET_TOKEN)
+        try {
+            webView.loadUrl(URL_AUTH_GET_TOKEN)
 
 
-        webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(
-                view: WebView?,
-                request: WebResourceRequest?
-            ): Boolean {
-                urlLink = webView.url.toString()
-                Log.d("!!!CW", urlLink)
-                val accessS = urlLink
-                val tokenBufferS = accessS.substringBefore("%2526expires_in")
-                val token = tokenBufferS.substringAfter("%253D")
-                dm.token.value = token
+            webView.webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    urlLink = webView.url.toString()
+                    Log.d("!!!CW", urlLink)
+                    val accessS = urlLink
+                    val tokenBufferS = accessS.substringBefore("%2526expires_in")
+                    val token = tokenBufferS.substringAfter("%253D")
+                    dm.token.value = token
 
-                return super.shouldOverrideUrlLoading(view, request)
+                    return super.shouldOverrideUrlLoading(view, request)
+                }
             }
+        }catch (exception: Exception){
+            Log.d("!!!", "error")
         }
+
 
     }
 
